@@ -482,7 +482,14 @@ class assCodeQuestionGUI extends assQuestionGUI implements ilGuiQuestionScoringA
 			}
 	
 			// edit page
-			$this->addTab_Question($ilTabs);
+			if (method_exists($this, 'addTabQuestion')) {
+                // >= 7.11
+                $this->addTab_Question($ilTabs);
+            }
+            if (method_exists($this, 'addTabQuestionPreview')) {
+                // <= 7.10
+                $this->addTab_QuestionPreview($ilTabs);
+            }
 		}
 
 		$force_active = false;
